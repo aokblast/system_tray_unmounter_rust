@@ -3,10 +3,9 @@ use sysinfo::{Disk, DiskExt, System, RefreshKind, SystemExt};
 use tao::{menu::{self, MenuItemAttributes, CustomMenuItem, MenuType}, system_tray::{self, SystemTrayBuilder}, TrayId, event_loop::{EventLoop, ControlFlow}, event::{Event, StartCause}};
 use image::io::Reader as ImageReader;
 use byte_unit::Byte;
-use nix::mount;
 
 fn main() {
-    let icon_path = "./icon.png";
+    let icon_path = "/Applications/System-Tray-Mounter.app/Contents/Resources/icon.png";
     let icon = load_icon(path::Path::new(icon_path));
     let tray_id = TrayId::new("Mountd");
     let event_loop = EventLoop::new();
@@ -35,7 +34,7 @@ fn main() {
                 } else {
                     for idx in 0..disk_items.len() {
                         if disk_items.get(idx).unwrap().clone().id() == menu_id && sysinfo.disks().get(idx + 1).unwrap().is_removable() {
-                            mount::unmount(sysinfo.disks().get(idx).unwrap().mount_point(), mount::MntFlags::empty()).unwrap();
+                            std::process::Command::new("diskutil").arg("unmount").arg(sysinfo.disks().get(idx + 1).unwrap().mount_point()).output().unwrap();
                             break;
                         }
                     }
