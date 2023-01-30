@@ -16,7 +16,6 @@ short_description = "System tray unmount tool for Mac OS"
 [dependencies]
 byte-unit = "4.0.18"
 image = "0.24.5"
-rand = "0.8.5"
 sysinfo = "0.27.7"
 tao = {version = "0.17.0", features = [ "tray" ]}
 
