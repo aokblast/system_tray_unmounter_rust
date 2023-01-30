@@ -10,15 +10,8 @@ identifier = "com.aok.blast"
 icon = ["icon.png"]
 version = "1.0.0"
 resources = ["icon.png"]
-copyright = "Copyright (c) Jane Doe 2016. All rights reserved."
-category = "Developer Tool"
+copyright = "Copyright (c) AoK Blast 2023. All rights reserved."
 short_description = "System tray unmount tool for Mac OS"
-long_description = """
-System tray unmount tool for Mac OS
-"""
-deb_depends = []
-osx_frameworks = []
-osx_url_schemes = ["com.aok.blast"]
 
 [dependencies]
 byte-unit = "4.0.18"
