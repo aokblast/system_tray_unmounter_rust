@@ -1,0 +1,13 @@
+[package]
+name = "system-tray-mounter"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+byte-unit = "4.0.18"
+image = "0.24.5"
+nix = "0.26.2"
+rand = "0.8.5"
+sysinfo = "0.27.7"
+tao = {version = "0.17.0", features = [ "tray" ]}
+
