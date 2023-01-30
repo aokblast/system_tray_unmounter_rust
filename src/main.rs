@@ -3,8 +3,11 @@ use sysinfo::{Disk, DiskExt, System, RefreshKind, SystemExt};
 use tao::{menu::{self, MenuItemAttributes, CustomMenuItem, MenuType}, system_tray::{self, SystemTrayBuilder}, TrayId, event_loop::{EventLoop, ControlFlow}, event::{Event, StartCause}};
 use image::io::Reader as ImageReader;
 use byte_unit::Byte;
+use daemonize::Daemonize;
 
 fn main() {
+    Daemonize::new().start().unwrap();
+
     let icon_path = "/Applications/System-Tray-Mounter.app/Contents/Resources/icon.png";
     let icon = load_icon(path::Path::new(icon_path));
     let tray_id = TrayId::new("Mountd");
