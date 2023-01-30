@@ -27,7 +27,7 @@ fn main() {
     let mut system_tray = Some(system_tray);
 
     event_loop.run(move |event, _event_loop, control_flow| {
-        *control_flow = ControlFlow::WaitUntil(Instant::now() + Duration::new(0, 750));
+        *control_flow = ControlFlow::WaitUntil(Instant::now() + Duration::from_millis(500));
 
         match event {
             Event::MenuEvent { window_id: _window_id , menu_id, origin: MenuType::ContextMenu, .. } => {
