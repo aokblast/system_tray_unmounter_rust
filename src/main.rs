@@ -1,4 +1,4 @@
-use std::{path, time::{Duration, Instant}};
+use std::{path, time::{Duration, Instant}, env::current_dir};
 use sysinfo::{Disk, DiskExt, System, RefreshKind, SystemExt};
 use tao::{menu::{self, MenuItemAttributes, CustomMenuItem, MenuType}, system_tray::{self, SystemTrayBuilder}, TrayId, event_loop::{EventLoop, ControlFlow}, event::{Event, StartCause}};
 use image::io::Reader as ImageReader;
@@ -8,8 +8,16 @@ use daemonize::Daemonize;
 fn main() {
     Daemonize::new().start().unwrap();
 
-    let icon_path = "/Applications/System-Tray-Mounter.app/Contents/Resources/icon.png";
-    let icon = load_icon(path::Path::new(icon_path));
+    let mut icon_path = current_dir().unwrap().as_path().to_str().unwrap().to_string();
+
+    if cfg!(target_os = "macos") {
+        icon_path = "/Applications/System-Tray-Mounter.app/Contents/Resources".to_string();
+    }
+
+    icon_path.push_str("/icon.png");
+
+
+    let icon = load_icon(path::Path::new(&icon_path));
     let tray_id = TrayId::new("Mountd");
     let event_loop = EventLoop::new();
 
